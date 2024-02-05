@@ -78,11 +78,11 @@ namespace Game6
                 {
                     return;
                 }
-                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == false) == 0)
+                if (persons.Count(Game => Game.life == true) == 0)
                 {
                     return;
                 }
-                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == true) == 0)
+                if (persons.Count(Game => Game.life == true) == 0)
                 {
                     return;
                 }
@@ -124,11 +124,11 @@ namespace Game6
                 {
                     return;
                 }
-                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == false) == 0)
+                if (persons.Count(Game => Game.life == true) == 0)
                 {
                     return;
                 }
-                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == true) == 0)
+                if (persons.Count(Game => Game.life == true) == 0)
                 {
                     return;
                 }
@@ -486,12 +486,12 @@ namespace Game6
                         break;
                 }
             }
-            else
+            else//*
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(" персонаж мёртв ");
                 Console.ForegroundColor = ConsoleColor.White;
-                Menu2(persons);
+                //Menu2(persons);
             }
         }
         /*private static void Smert()
