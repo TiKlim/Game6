@@ -20,7 +20,7 @@ namespace Game6
                 Console.ForegroundColor = ConsoleColor.White;
                 if (vybor == "1")
                 {
-                    Game.persons.Add(new Game()); //Добавляю в список живых новобранца
+                    Game.persons.Add(new Game()); //Добавляю в список живых 
                 }
                 else if (vybor == "2")
                 {
@@ -30,10 +30,16 @@ namespace Game6
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         string? s = Console.ReadLine();
                         Console.ForegroundColor = ConsoleColor.White;
-                        if (s == a.Name) //Поиск по имени персонажа
+                        if (s == a.Name && persons.Count > 1) //Поиск по имени персонажа
                         {
                             per = a;
                             per.Menu2(Game.persons);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Персонажа с таким именем не существует");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                     }
                 }
