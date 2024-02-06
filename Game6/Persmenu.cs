@@ -30,7 +30,7 @@ namespace Game6
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         string? s = Console.ReadLine();
                         Console.ForegroundColor = ConsoleColor.White;
-                        if (s == a.Name && persons.Count > 1) //Поиск по имени персонажа
+                        if (s == a.Name) //Поиск по имени персонажа
                         {
                             per = a;
                             per.Menu2(Game.persons);
