@@ -292,7 +292,7 @@ namespace Game6
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(" ПОБЕДА ");
+                        Console.WriteLine("     ПОБЕДА ");
                         Console.ForegroundColor = ConsoleColor.White;
                         medaly += 1;
                         Menu2(persons);
@@ -316,11 +316,10 @@ namespace Game6
                             break;
                     } break;
                 }
-
-                if (vragy.Count(Game => Game.life == true) == 0) //проверка кто победил 
+                if (vragy.Count(Game => Game.life == true) == 0) //проверяю кто победил 
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(" ПОБЕДА ");
+                    Console.WriteLine("     ПОБЕДА ");
                     Console.ForegroundColor = ConsoleColor.White;
                     medaly += 1;
                     Menu2(persons);
