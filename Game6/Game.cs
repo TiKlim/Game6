@@ -238,8 +238,8 @@ namespace Game6
                 {
                     vraguron += person.uron;
                 }
-                druguron = druguron / vragy.Count; //Деление общего урона на количество противников
-                vraguron = vraguron / drugy.Count; //Деление общего урона на количество противников
+                druguron /= vragy.Count; //Деление общего урона на количество противников
+                vraguron /= drugy.Count; //Деление общего урона на количество противников
                 foreach (Game person in drugy) //Нанесение урона 
                 {
                     person.heartstek -= vraguron;
@@ -261,6 +261,7 @@ namespace Game6
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(" вы мертвы ");
                     Console.ForegroundColor = ConsoleColor.White;
+                    //Menu2(persons);
                     //persons.Remove(new Game(1));
                     return;
                 }
@@ -278,7 +279,7 @@ namespace Game6
                 {
                     if (person.life == true)
                     {
-                        Console.WriteLine($"Имя: {person.name}, \nОЗ: {person.heartstek}, \nУрона получено: {vraguron}");
+                        Console.WriteLine($"[Имя: {person.name}, \n[ОЗ: {person.heartstek}, \n[Урона получено: {vraguron}");
                     }
                 }
                 Console.WriteLine("> Состояние Ваших врагов: ");
@@ -286,66 +287,9 @@ namespace Game6
                 {
                     if (person.life == true)
                     {
-                        Console.WriteLine($"Имя: {person.name}, \nОЗ: {person.heartstek}, \nУрона получено: {druguron}");
+                        Console.WriteLine($"[Имя: {person.name}, \n[ОЗ: {person.heartstek}, \n[Урона получено: {druguron}");
                     }
-                }
-                Console.WriteLine("> Бой продолжается");
-                Console.WriteLine("> Ваши действия: 1 - Сражаться, нанося обычный урон; 2 - Использовать ультимативную способность.");
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                string? vybor3 = Console.ReadLine();
-                Console.ForegroundColor = ConsoleColor.White;
-                switch (vybor3)
-                {
-                    case "1":
-                        Boy(persons);
-                        break;
-                    case "2":
-                        Ulta(persons);
-                        break;
-                }
-                /*if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0 && persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine(" Ничья ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Menu2(persons);
-                    return;
-                }
-                else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0)//true
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("    ПОБЕДА \nвсе враги повержены ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    medaly += 1;
-                    Persmenu.Menu();
-                    return;
-                }
-                else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("    поражениe \nсоюзников не осталось ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Persmenu.Menu();
-                    return;
-                }
-                else
-                {
-                    if (life == false)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(" вы мертвы ");
-                        Console.ForegroundColor = ConsoleColor.White;
-                        //persons.RemoveAll(Name);
-                        //Menu2(persons);
-                        Persmenu.Menu();
-                        return;
-                    }
-                    while (true) //выбор дествий в бою
-                    {
-                        Menu2(persons);
-                        break;
-                    }
-                    if (vragy.Count(Game => Game.life == true) == 0) //проверка кто победил
+                    else
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine(" ПОБЕДА ");
@@ -354,10 +298,38 @@ namespace Game6
                         Menu2(persons);
                         return;
                     }
-                    Console.WriteLine("> Бой продолжается");
-                }*/
+                }
+                //Console.WriteLine("> Бой продолжается");
+                while (true)
+                {
+                    Console.WriteLine("> Ваши действия: 1 - Сражаться, нанося обычный урон; 2 - Использовать ультимативную способность.");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    string? vybor3 = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    switch (vybor3)
+                    {
+                        case "1":
+                            Boy(persons);
+                            break;
+                        case "2":
+                            Ulta(persons);
+                            break;
+                    } break;
+                }
+
+                if (vragy.Count(Game => Game.life == true) == 0) //проверка кто победил 
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(" ПОБЕДА ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    medaly += 1;
+                    Menu2(persons);
+                    return;
+                }
+                Console.WriteLine("> Бой продолжается");
             }
         }
+    
         private void Ulta(List<Game> persons) //Использование ультимативной способности в бою
         {
             foreach (Game person in persons)
@@ -501,7 +473,14 @@ namespace Game6
                 }
                 else
                 {
-                    if (life == true)
+                    if (life == false)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(" персонаж мёртв ");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        return;
+                    }
+                    else
                     {
                         Console.WriteLine("                                                ~МЕНЮ ПЕРСОНАЖА~");
                         Console.WriteLine("1 - Показать информацию о персонаже; 2 - Переместиться влево/вправо; 3 - Переместиться вверх/вниз; 4 - Лечить себя; 5 - Лечить товарищей; 6 - Выход в иговое меню.");
