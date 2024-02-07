@@ -10,7 +10,8 @@ namespace Game6
     {
         public static void Menu()
         {
-            Game per;
+            //Game game = new Game();
+            //List<Game> persons = new List<Game>();
             while (true)
             {
                 Console.WriteLine("                                                ~ИГРОВОЕ МЕНЮ~");
@@ -24,24 +25,35 @@ namespace Game6
                 }
                 else if (vybor == "2")
                 {
-                    foreach (Game a in Game.persons) //Выполняю перебор в списке живых
-                    {
+                    //foreach (Game a in Game.persons) //Выполняю перебор в списке живых
+                    //{
                         Console.WriteLine("> Имя: ");
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         string? s = Console.ReadLine();
                         Console.ForegroundColor = ConsoleColor.White;
-                        if (s == a.Name) //Поиск по имени персонажа
+                    var names = from g in Game.persons
+                                where g.Name == s
+                                select g;
+                    foreach (var name in names)
+                    {
+                        name.Menu2(Game.persons);
+                    }
+                        /*if (s == a.Name) //Поиск по имени персонажа
                         {
                             per = a;
                             per.Menu2(Game.persons);
-                        }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Персонажа с таким именем не существует");
-                            Console.ForegroundColor = ConsoleColor.White;
-                        }
+                        }*/
+                    /*if (persons.Exists(x => x.Name == s))
+                    {
+                        game.Menu2(persons.Find(x => x.Name.Contains(s)));
                     }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Персонажа с таким именем не существует");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }*/
+                    //}
                 }
             }
         }
