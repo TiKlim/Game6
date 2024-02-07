@@ -303,7 +303,7 @@ namespace Game6
                         Ulta(persons);
                         break;
                 }
-                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0 && persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)
+                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0 && persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine(" Ничья ");
@@ -311,7 +311,7 @@ namespace Game6
                     Menu2(persons);
                     return;
                 }
-                else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0)
+                else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0)//true
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("    ПОБЕДА \nвсе враги повержены ");
@@ -320,12 +320,12 @@ namespace Game6
                     Menu2(persons);
                     return;
                 }
-                else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)
+                else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("    поражениe \nсоюзников не осталось ");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Menu2(persons);
+                    Persmenu.Menu();
                     return;
                 }
                 else
@@ -336,7 +336,8 @@ namespace Game6
                         Console.WriteLine(" вы мертвы ");
                         Console.ForegroundColor = ConsoleColor.White;
                         //persons.RemoveAll(Name);
-                        Menu2(persons);
+                        //Menu2(persons);
+                        Persmenu.Menu();
                         return;
                     }
                     while (true) //выбор дествий в бою
@@ -367,7 +368,7 @@ namespace Game6
                     {
                         person.life = false;
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("    ПОБЕДА \nвсе враги повержены ");
+                        Console.WriteLine(" ПОБЕДА ");
                         Console.ForegroundColor = ConsoleColor.White;
                         medaly += 1;
                         Menu2(persons);
@@ -432,7 +433,7 @@ namespace Game6
             {
                 if (heartstek <= 80)
                 {
-                    heartstek += 15;
+                    heartstek += 10;
                 }
                 else if (heartstek >= 80)
                 {
@@ -449,7 +450,9 @@ namespace Game6
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("! СЛЕДУЕТ ПОБЕДИТЬ В ПЯТИ СТЫЧКАХ !");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
             Menu2(persons);
