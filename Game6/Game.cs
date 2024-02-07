@@ -78,11 +78,11 @@ namespace Game6
                 {
                     return;
                 }
-                if (persons.Count(Game => Game.life == true) == 0)
+                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == false) == 0)
                 {
                     return;
                 }
-                if (persons.Count(Game => Game.life == true) == 0)
+                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == true) == 0)
                 {
                     return;
                 }
@@ -124,11 +124,11 @@ namespace Game6
                 {
                     return;
                 }
-                if (persons.Count(Game => Game.life == true) == 0)
+                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == false) == 0)
                 {
                     return;
                 }
-                if (persons.Count(Game => Game.life == true) == 0)
+                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == true) == 0)
                 {
                     return;
                 }
@@ -303,7 +303,7 @@ namespace Game6
                         Ulta(persons);
                         break;
                 }
-                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0 && persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
+                /*if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0 && persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine(" Ничья ");
@@ -317,7 +317,7 @@ namespace Game6
                     Console.WriteLine("    ПОБЕДА \nвсе враги повержены ");
                     Console.ForegroundColor = ConsoleColor.White;
                     medaly += 1;
-                    Menu2(persons);
+                    Persmenu.Menu();
                     return;
                 }
                 else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
@@ -355,7 +355,7 @@ namespace Game6
                         return;
                     }
                     Console.WriteLine("> Бой продолжается");
-                }
+                }*/
             }
         }
         private void Ulta(List<Game> persons) //Использование ультимативной способности в бою
@@ -368,7 +368,7 @@ namespace Game6
                     {
                         person.life = false;
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(" ПОБЕДА ");
+                        Console.WriteLine("     ПОБЕДА ");
                         Console.ForegroundColor = ConsoleColor.White;
                         medaly += 1;
                         Menu2(persons);
@@ -459,42 +459,86 @@ namespace Game6
         }
         public void Menu2(List<Game> persons)
         {
-            if (life == true)
+            foreach (Game pers in persons)
             {
-                Console.WriteLine("                                                ~МЕНЮ ПЕРСОНАЖА~");
-                Console.WriteLine("1 - Показать информацию о персонаже; 2 - Переместиться влево/вправо; 3 - Переместиться вверх/вниз; 4 - Лечить себя; 5 - Лечить товарищей; 6 - Выход в иговое меню.");
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                string? vybor6 = Console.ReadLine();
-                Console.ForegroundColor = ConsoleColor.White;
-                switch (vybor6)
+                if (x == pers.x && y == pers.y)
                 {
-                    case "1":
-                        Print();
-                        Menu2(persons);
-                        break;
-                    case "2":
-                        MoveX(persons);
-                        break;
-                    case "3":
-                        MoveY(persons);
-                        break;
-                    case "4":
-                        Lechenie();
-                        break;
-                    case "5":
-                        Iscelenie(persons);
-                        break;
-                    case "6":
-                        Persmenu.Menu();
-                        break;
+                    if (pers.svoychuzhoy == true)
+                    {
+                        if (svoychuzhoy != pers.svoychuzhoy)
+                        {
+                            Proverka(persons);
+                        }
+                    }
                 }
             }
-            else//*
+            while (true)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(" персонаж мёртв ");
-                Console.ForegroundColor = ConsoleColor.White;
-                //Menu2(persons);
+                if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0 && persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(" Ничья ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Menu2(persons);
+                    return;
+                }
+                else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy != svoychuzhoy) == 0)//true
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("     ПОБЕДА \nвсе враги повержены ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    medaly += 1;
+                    Persmenu.Menu();
+                    return;
+                }
+                else if (persons.Count(Game => Game.life == true && Game.svoychuzhoy == svoychuzhoy) == 0)//true
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("     поражениe \nсоюзников не осталось ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Persmenu.Menu();
+                    return;
+                }
+                else
+                {
+                    if (life == true)
+                    {
+                        Console.WriteLine("                                                ~МЕНЮ ПЕРСОНАЖА~");
+                        Console.WriteLine("1 - Показать информацию о персонаже; 2 - Переместиться влево/вправо; 3 - Переместиться вверх/вниз; 4 - Лечить себя; 5 - Лечить товарищей; 6 - Выход в иговое меню.");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        string? vybor6 = Console.ReadLine();
+                        Console.ForegroundColor = ConsoleColor.White;
+                        switch (vybor6)
+                        {
+                            case "1":
+                                Print();
+                                Menu2(persons);
+                                break;
+                            case "2":
+                                MoveX(persons);
+                                break;
+                            case "3":
+                                MoveY(persons);
+                                break;
+                            case "4":
+                                Lechenie();
+                                break;
+                            case "5":
+                                Iscelenie(persons);
+                                break;
+                            case "6":
+                                Persmenu.Menu();
+                                break;
+                        }
+                    }
+                    /*else//*
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(" персонаж мёртв ");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        //Menu2(persons);
+                    }*/
+                }
             }
         }
         /*private static void Smert()
